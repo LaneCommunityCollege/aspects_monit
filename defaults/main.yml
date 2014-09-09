@@ -1,0 +1,7 @@
+---
+# defaults file for aspects_monit
+aspects_monit_packages:
+  monit:
+    state: "latest"
+    Debian: "monit"
+    RedHat: "monit"

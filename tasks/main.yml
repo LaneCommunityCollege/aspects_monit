@@ -1,0 +1,25 @@
+---
+# tasks file for aspects_monit
+- include: installDebian.yml
+  when: ansible_os_family == "Debian"
+  tags:
+  - aspects_monit
+- include: installRedHat.yml
+  when: ansible_os_family == "RedHat"
+  tags:
+  - aspects_monit
+- include: installSuse.yml
+  when: ansible_os_family == "Suse"
+  tags:
+  - aspects_monit
+- name: set /etc/monit/monitrc template
+  template:
+    src="etc-monit-monitrc.j2"
+    dest="/etc/monit/monitrc"
+    owner="root"
+    group="root"
+    mode="600"
+  notify: restart monit
+  tags:
+  - aspects_monit
+  - aspects_monit_template
