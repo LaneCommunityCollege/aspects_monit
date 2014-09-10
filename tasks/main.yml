@@ -1,25 +1,55 @@
 ---
 # tasks file for aspects_monit
-- include: installDebian.yml
-  when: ansible_os_family == "Debian"
+- name: setup monit directories.
+  when: aspects_monit_enabled
+  file:
+    state=directory
+    path={{ item }}
+    owner=root
+    group=root
+    mode=750
+  with_items:
+  - /opt/monit
+  - /opt/monit/bin
+  - /opt/monit/id
+  - /opt/monit/state
+  - /opt/monit/events
+  - /opt/monit/conf.d
   tags:
-  - aspects_monit
-- include: installRedHat.yml
-  when: ansible_os_family == "RedHat"
+    - aspects_monit
+
+- name: copy monit excutable
+  when: aspects_monit_enabled
+  copy:
+    src="downloads/{{ aspects_monit_executable_name }}"
+    dest=/opt/monit/bin/monit
+    mode=700
+    owner=root
+    group=root
   tags:
-  - aspects_monit
-- include: installSuse.yml
-  when: ansible_os_family == "Suse"
-  tags:
-  - aspects_monit
-- name: set /etc/monit/monitrc template
+    - aspects_monit
+
+- name: set /opt/monit/monitrc template
+  when: aspects_monit_enabled
   template:
     src="etc-monit-monitrc.j2"
-    dest="/etc/monit/monitrc"
+    dest="/opt/monit/monitrc"
     owner="root"
     group="root"
     mode="600"
-  notify: restart monit
+  notify: start monit
   tags:
   - aspects_monit
   - aspects_monit_template
+
+- name: Set cron job so monit starts on boot
+  when: aspects_monit_enabled
+  cron:
+    name="aspects_monit - start monit at boot"
+    state="present"
+    cron_file=monit
+    user=root
+    special_time="reboot"
+    job="/opt/monit/bin/monit -c /opt/monit/monitrc"
+  tags:
+    - aspects_monit

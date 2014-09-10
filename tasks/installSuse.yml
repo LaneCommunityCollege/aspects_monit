@@ -1,8 +1,0 @@
----
-- name: Suse - Set monit packages state with Zypper
-  when: ansible_os_family == "Suse" and item.value.state != 'default' and item.value.state != 'purged' and item.value.Suse is defined
-  zypper: name={{ item.value.Suse }} state={{ item.value.state }}
-  with_dict: aspects_monit_packages
-  tags:
-    - aspects_monit
-    - aspects_monit_packages

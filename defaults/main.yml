@@ -5,3 +5,6 @@ aspects_monit_packages:
     state: "latest"
     Debian: "monit"
     RedHat: "monit"
+
+aspects_monit_enabled: yes
+aspects_monit_executable_name: monit-5.8.1-linux-x64

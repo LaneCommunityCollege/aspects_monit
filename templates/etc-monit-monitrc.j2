@@ -19,7 +19,7 @@
 #
   set daemon {{ aspects_monit_check_interval }}
   {% if aspects_monit_start_delay is defined %}
-   with start delaty {{ aspects_monit_start_delay }}
+   with start delay {{ aspects_monit_start_delay }}
   {% endif %}
 #   with start delay 240    # optional: delay the first check by 4-minutes (by 
 #                           # default Monit check immediately after Monit start)
@@ -45,7 +45,7 @@
  {% if aspects_monit_idfile is defined %}
  set idfile {{ aspects_monit_idfile }}
  {% else %}
- set idfile /var/lib/monit/id
+ set idfile /opt/monit/id/.monit.id
  {% endif %}
   
 #
@@ -58,7 +58,7 @@
  {% if aspects_monit_statefile is defined %}
  set statefile {{ aspects_monit_statefile }}
  {% else %}
- set statefile /var/lib/monit/state
+ set statefile /opt/monit/state/.monit.state
  {% endif %}
   
 #
@@ -88,7 +88,7 @@
  {% if aspects_monit_eventqueue is defined %}
   set eventqueue {{ aspects_monit_eventqueue }}
  {% else %}
- set eventqueue basedir /var/lib/monit/events slots 100
+ set eventqueue basedir /opt/monit/events slots 100
  {% endif %}
   
 #
@@ -293,7 +293,23 @@
 {% endfor %}
 {% endif %}
 
+{% if ansible_os_family == "RedHat" and aspects_monit_local_probes_RedHat is defined %}
+{% for localprobe in aspects_monit_local_probes_RedHat %}
+{{ aspects_monit_local_probes_RedHat[localprobe] }}
+{% endfor %}
+{% endif %}
 
+{% if ansible_os_family == "Debian" and aspects_monit_local_probes_Debian is defined %}
+{% for localprobe in aspects_monit_local_probes_Debian %}
+{{ aspects_monit_local_probes_Debian[localprobe] }}
+{% endfor %}
+{% endif %}
+
+{% if ansible_os_family == "Suse" and aspects_monit_local_probes_Suse is defined %}
+{% for localprobe in aspects_monit_local_probes_Suse %}
+{{ aspects_monit_local_probes_Suse[localprobe] }}
+{% endfor %}
+{% endif %}
 #
 #
 ###############################################################################
@@ -303,5 +319,5 @@
 ## It is possible to include additional configuration parts from other files or
 ## directories.
 #
-   include /etc/monit/conf.d/*
+   include /opt/monit/conf.d/*
 #

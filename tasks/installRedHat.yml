@@ -1,7 +1,0 @@
----
-- name: RedHat - Set monit packages state with yum
-  when: ansible_os_family == "RedHat" and item.value.state != 'default' and item.value.state != 'purged' and item.value.RedHat is defined
-  yum: name={{ item.value.RedHat }} state={{ item.value.state }}
-  with_dict: aspects_monit_packages
-  tags:
-    - aspects_monit_packages

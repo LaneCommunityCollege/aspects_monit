@@ -1,13 +1,16 @@
 ---
 # handlers file for aspects_monit
-- name: restart monit
-  service: name=monit state=restarted enabled=yes
+#- name: restart monit
+#  service: name=monit state=restarted enabled=yes
 
 - name: reload monit
-  service: name=monit state=reloaded enabled=yes
+  shell: /opt/monit/bin/monit -c /opt/monit/monitrc reload
+#  service: name=monit state=reloaded enabled=yes
 
 - name: start monit
-  service: name=monit state=started enabled=yes
+  shell: /opt/monit/bin/monit -c /opt/monit/monitrc
+#  service: name=monit state=started enabled=yes
 
 - name: stop monit
-  service: name=monit state=stopped
+  shell: /opt/monit/bin/monit -c /opt/monit/monitrc quit
+#  service: name=monit state=stopped
