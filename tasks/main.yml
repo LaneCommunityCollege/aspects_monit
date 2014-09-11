@@ -29,6 +29,22 @@
   tags:
     - aspects_monit
 
+- name: copy monit restart script
+  when: aspects_monit_enabled
+  copy:
+    src="restartmonit.sh"
+    dest=/opt/monit/bin/restartmonit.sh
+    mode=700
+    owner=root
+    group=root
+  tags:
+    - aspects_monit
+
+- include: installLdapTest.yml
+  when: aspects_monit_use_ldap_test == true
+  tags:
+    - aspects_monit
+
 - name: set /opt/monit/monitrc template
   when: aspects_monit_enabled
   template:
@@ -37,7 +53,7 @@
     owner="root"
     group="root"
     mode="600"
-  notify: start monit
+  notify: restart monit
   tags:
   - aspects_monit
   - aspects_monit_template

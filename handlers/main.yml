@@ -14,3 +14,6 @@
 - name: stop monit
   shell: /opt/monit/bin/monit -c /opt/monit/monitrc quit
 #  service: name=monit state=stopped
+
+- name: restart monit
+  shell: chdir="/opt/monit/bin/" bash restartmonit.sh

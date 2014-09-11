@@ -1,10 +1,14 @@
 ---
 # defaults file for aspects_monit
-aspects_monit_packages:
-  monit:
-    state: "latest"
-    Debian: "monit"
-    RedHat: "monit"
-
 aspects_monit_enabled: yes
 aspects_monit_executable_name: monit-5.8.1-linux-x64
+aspects_monit_use_ldap_test: false
+aspects_monit_ldap_test_config: {}
+#aspects_monit_ldap_test_host: ldaps://ldap.domain.tld
+#aspects_monit_ldap_test_binddn: cn=blah,ou=users,dc=domain,dc=tld
+#aspects_monit_ldap_test_password: password
+#aspects_monit_ldap_test_port: 636
+#aspects_monit_ldap_test_base: ou=users,dc=domain,dc=tld
+#aspects_monit_ldap_test_filter: (cn=blah)
+#aspects_monit_ldap_test_version: 3
+#aspects_monit_ldap_test_attributes: "cn, sn"

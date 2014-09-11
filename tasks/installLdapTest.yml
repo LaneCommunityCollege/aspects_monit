@@ -1,0 +1,12 @@
+---
+# only runs when aspects_monit_use_ldap_test = yes
+- name: Set ldap server authentication test script templates.
+  template:
+    src="ldaptest.sh.j2"
+    dest=/opt/monit/bin/{{ item.value.name }}.ldaptest.sh
+    mode=700
+    owner=root
+    group=root
+  with_dict: aspects_monit_ldap_test_config
+  tags:
+    - aspects_monit
