@@ -48,7 +48,7 @@
 - name: set /opt/monit/monitrc template
   when: aspects_monit_enabled
   template:
-    src="etc-monit-monitrc.j2"
+    src="opt-monit-monitrc.j2"
     dest="/opt/monit/monitrc"
     owner="root"
     group="root"
