@@ -16,4 +16,4 @@
 #  service: name=monit state=stopped
 
 - name: restart monit
-  shell: chdir="/opt/monit/bin/" bash restartmonit.sh
+  shell: chdir="/opt/monit/bin/" /bin/bash restartmonit.sh
