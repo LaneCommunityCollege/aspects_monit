@@ -1,7 +1,7 @@
 ---
 # defaults file for aspects_monit
 aspects_monit_enabled: yes
-aspects_monit_executable_name: monit-5.8.1-linux-x64
+aspects_monit_executable_name: monit
 aspects_monit_use_ldap_test: false
 aspects_monit_ldap_test_config: {}
 #aspects_monit_ldap_test_host: ldaps://ldap.domain.tld
