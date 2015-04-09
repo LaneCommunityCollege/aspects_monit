@@ -58,6 +58,18 @@
   - aspects_monit
   - aspects_monit_template
 
+- name: set /etc/pam.d/monit template
+  when: aspects_monit_enabled
+  template:
+    src="etc-pam.d-monit.j2"
+    dest="/etc/pam.d/monit"
+    owner="root"
+    group="root"
+    mode="644"
+  notify: restart monit
+  tags:
+  - aspects_monit
+
 - name: Set cron job so monit starts on boot
   when: aspects_monit_enabled
   cron:
