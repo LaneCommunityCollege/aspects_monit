@@ -1,0 +1,15 @@
+---
+- name: Debian - Install python-apt for use with ansible apt modules.
+  when: ansible_os_family == "Debian"
+  apt: 
+    pkg: "{{ item }}"
+    state: present
+    update_cache: "yes"
+    cache_valid_time: "86400"
+  with_items:
+    - python-apt
+    - "{{ aspects_logstash_packages.openjdk.Debian }}"
+    - logstash
+  tags:
+    - aspects_logstash
+    - aspects_logstash_package_install
