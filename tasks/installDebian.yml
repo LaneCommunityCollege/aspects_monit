@@ -1,0 +1,16 @@
+---
+- name: Debian - Install python-apt for use with ansible apt modules.
+  apt:
+    pkg: python-apt
+    state: present
+  tags:
+  - aspects_monit
+  - aspects_monit_run_install
+
+- name: Debian - Install monit
+  apt:
+    pkg: "monit"
+    state: "present"
+  tags:
+  - aspects_monit
+  - aspects_monit_run_install

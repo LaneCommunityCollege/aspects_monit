@@ -1,0 +1,28 @@
+---
+
+# Newer versions of monit do not check /etc/monit.conf by default.
+# CentOS 6.x has an init script that does not add any opts to the start function.
+# Thus, we fix the problem with a link from /etc/monitrc (which newer version of 
+# monit check for) to /etc/monit.conf. That makes the init script work.
+- name: RedHat - Add symlink from /etc/monitrc to /etc/monit.conf
+  when: ansible_os_family == "RedHat"
+  file:
+    state: link
+    src: /etc/monit.conf
+    dest: /etc/monitrc
+  tags: 
+    - aspects_monit
+    - aspects_monit_update
+
+- name: Copy monit excutable over installed monit
+  copy: 
+    src: "{{ aspects_monit_update_excutable_relative_path }}"
+    dest: "{{ aspects_monit_update_excutable_destination }}"
+    mode: "755"
+    owner: "root"
+    group: "root"
+  notify: restart monit
+  tags: 
+    - aspects_monit
+    - aspects_monit_update
+

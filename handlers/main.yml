@@ -1,19 +1,44 @@
 ---
-# handlers file for aspects_monit
-#- name: restart monit
-#  service: name=monit state=restarted enabled=yes
-
-- name: reload monit
-  shell: /opt/monit/bin/monit -c /opt/monit/monitrc reload
-#  service: name=monit state=reloaded enabled=yes
+# Handlers for running repo install monit.
+- name: restart monit
+  service: name=monit state=restarted enabled=yes
+  tags:
+  - aspects_monit
+  - aspects_monit_handlers
 
 - name: start monit
-  shell: /opt/monit/bin/monit -c /opt/monit/monitrc
-#  service: name=monit state=started enabled=yes
+  service: name=monit state=started enabled=yes
+  tags:
+  - aspects_monit
+  - aspects_monit_handlers
 
 - name: stop monit
-  shell: /opt/monit/bin/monit -c /opt/monit/monitrc quit
-#  service: name=monit state=stopped
+  service: name=monit state=stopped enabled=yes
+  tags:
+  - aspects_monit
+  - aspects_monit_handlers
 
-- name: restart monit
+# Handlers for running manually installed monit.
+- name: reload manual_monit
+  shell: /opt/monit/bin/monit -c /opt/monit/monitrc reload
+  tags:
+  - aspects_monit
+  - aspects_monit_handlers
+
+- name: start manual_monit
+  shell: /opt/monit/bin/monit -c /opt/monit/monitrc
+  tags:
+  - aspects_monit
+  - aspects_monit_handlers
+
+- name: stop manual_monit
+  shell: /opt/monit/bin/monit -c /opt/monit/monitrc quit
+  tags:
+  - aspects_monit
+  - aspects_monit_handlers
+
+- name: restart manual_monit
   shell: chdir="/opt/monit/bin/" /bin/bash restartmonit.sh
+  tags:
+  - aspects_monit
+  - aspects_monit_handlers

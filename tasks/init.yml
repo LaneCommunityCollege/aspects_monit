@@ -1,0 +1,70 @@
+---
+- name: include Debian install tasks
+  when: 
+    ansible_os_family == "Debian" and 
+    aspects_monit_run_manual_install == False 
+    and aspects_monit_run_install
+  include: installDebian.yml
+  tags: 
+    - aspects_monit
+    - aspects_monit_install
+
+- name: include RedHat install tasks
+  include: installRedHat.yml
+  when: 
+    ansible_os_family == "RedHat" and 
+    aspects_monit_run_manual_install == False and 
+    aspects_monit_run_install
+  tags: 
+    - aspects_monit
+    - aspects_monit_install
+
+- name: Include manual install tasks
+  when: 
+    aspects_monit_run_manual_install and 
+    aspects_monit_use_manual_tasks and 
+    aspects_monit_run_update
+  include: installManual.yml
+  tags: 
+    - aspects_monit
+    - aspects_monit_install
+
+- name: Include Debian Configuration tasks
+  when: 
+    ansible_os_family == "Debian" and 
+    aspects_monit_use_manual_tasks == False 
+  include: configureDebian.yml
+  tags: 
+    - aspects_monit
+    - aspects_monit_config
+
+- name: Include RedHat Configuration tasks
+  when: 
+    ansible_os_family == "RedHat" and 
+    aspects_monit_use_manual_tasks == False 
+  include: configureRedHat.yml
+  tags: 
+    - aspects_monit
+    - aspects_monit_config
+
+- name: Include manual Configuration tasks
+  when: aspects_monit_use_manual_tasks == True 
+  include: configureManual.yml
+  tags: 
+    - aspects_monit
+    - aspects_monit_config
+
+- name: Include update tasks
+  when: 
+    aspects_monit_run_update and 
+    (ansible_os_family == "Debian" or ansible_os_family == "RedHat") 
+    and aspects_monit_use_manual_tasks == False 
+  include: update.yml
+  tags: 
+    - aspects_monit
+    - aspects_monit_update
+
+- include: installLdapTest.yml
+  when: aspects_monit_use_ldap_test == true
+  tags:
+    - aspects_monit

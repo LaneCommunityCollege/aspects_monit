@@ -1,0 +1,13 @@
+---
+- name: Template config file
+  template:
+    src: "monitrc.j2"
+    dest: "/etc/monit.conf"
+    mode: "600"
+    owner: 0
+    group: 0
+  notify: restart monit
+  tags:
+  - aspects_monit
+  - aspects_monit_config
+  - aspects_monit_configure
