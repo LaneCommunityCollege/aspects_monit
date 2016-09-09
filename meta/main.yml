@@ -4,19 +4,19 @@ galaxy_info:
   description: Install and configure monit.
   company: Lane Community College
   license: MIT
-  min_ansible_version: 1.6
+  min_ansible_version: 1.9
   #
   # Below are all platforms currently available. Just uncomment
-  # the ones that apply to your role. If you don't see your 
+  # the ones that apply to your role. If you don't see your
   # platform on this list, let us know and we'll get it added!
   #
   platforms:
-  #- name: EL
-  #  versions:
+  - name: EL
+    versions:
   #  - all
   #  - 5
   #  - 6
-  #  - 7
+    - 7
   #- name: GenericUNIX
   #  versions:
   #  - all
@@ -60,16 +60,9 @@ galaxy_info:
   #  - 9.2
   - name: Ubuntu
     versions:
-  #  - all
-  #  - lucid
-  #  - maverick
-  #  - natty
-  #  - oneiric
     - precise
-  #  - quantal
-  #  - raring
-  #  - saucy
-  #  - trusty
+    - trusty
+    - xenial
   #- name: SLES
   #  versions:
   #  - all

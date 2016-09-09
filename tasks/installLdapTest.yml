@@ -7,6 +7,6 @@
     mode: 700
     owner: root
     group: root
-  with_dict: aspects_monit_ldap_test_config
+  with_dict: "{{ aspects_monit_ldap_test_config }}"
   tags:
     - aspects_monit
