@@ -1,19 +1,28 @@
 ---
 # Handlers for running repo install monit.
 - name: restart monit
-  service: name=monit state=restarted enabled=yes
+  service:
+    name: monit
+    state: restarted
+    enabled: yes
   tags:
   - aspects_monit
   - aspects_monit_handlers
 
 - name: start monit
-  service: name=monit state=started enabled=yes
+  service:
+    name: monit
+    state: started
+    enabled: yes
   tags:
   - aspects_monit
   - aspects_monit_handlers
 
 - name: stop monit
-  service: name=monit state=stopped enabled=yes
+  service:
+    name: monit
+    state: stopped
+    enabled: yes
   tags:
   - aspects_monit
   - aspects_monit_handlers
@@ -38,7 +47,9 @@
   - aspects_monit_handlers
 
 - name: restart manual_monit
-  shell: chdir="/opt/monit/bin/" /bin/bash restartmonit.sh
+  shell: /bin/bash restartmonit.sh
+    args:
+      chdir: "/opt/monit/bin/"
   tags:
   - aspects_monit
   - aspects_monit_handlers
