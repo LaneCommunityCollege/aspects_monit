@@ -56,7 +56,7 @@ set eventqueue basedir /var/lib/monit/events slots 100
 
 {% if aspects_monit_alert_recipients is defined %}
 ## Send alerts to the following users
-{% for item in aspects_monit_alert_recipients %}
+{% for item in aspects_monit_alert_recipients|sort %}
 set alert {{ aspects_monit_alert_recipients[item] }}
 {% endfor %}
 {% endif %}
@@ -68,35 +68,35 @@ set alert {{ aspects_monit_alert_recipients[item] }}
 
 {% if aspects_monit_remote_probes is defined %}
 ## Ansible generated probes aimed at remote servers.
-{% for remoteprobe in aspects_monit_remote_probes %}
+{% for remoteprobe in aspects_monit_remote_probes|sort %}
 {{ aspects_monit_remote_probes[remoteprobe] }}
 {% endfor %}
 {% endif %}
 
 {% if aspects_monit_local_probes is defined %}
 ## Ansible generated probes local to this server.
-{% for localprobe in aspects_monit_local_probes %}
+{% for localprobe in aspects_monit_local_probes|sort %}
 {{ aspects_monit_local_probes[localprobe] }}
 {% endfor %}
 {% endif %}
 
 {% if ansible_os_family == "RedHat" and aspects_monit_local_probes_RedHat is defined %}
 ## RedHat - Ansible generated probes local to this server.
-{% for localprobe in aspects_monit_local_probes_RedHat %}
+{% for localprobe in aspects_monit_local_probes_RedHat|sort %}
 {{ aspects_monit_local_probes_RedHat[localprobe] }}
 {% endfor %}
 {% endif %}
 
 {% if ansible_os_family == "Debian" and aspects_monit_local_probes_Debian is defined %}
 ## Debian - Ansible generated probes local to this server.
-{% for localprobe in aspects_monit_local_probes_Debian %}
+{% for localprobe in aspects_monit_local_probes_Debian|sort %}
 {{ aspects_monit_local_probes_Debian[localprobe] }}
 {% endfor %}
 {% endif %}
 
 {% if ansible_os_family == "Suse" and aspects_monit_local_probes_Suse is defined %}
 ## Suse - Ansible generated probes local to this server.
-{% for localprobe in aspects_monit_local_probes_Suse %}
+{% for localprobe in aspects_monit_local_probes_Suse|sort %}
 {{ aspects_monit_local_probes_Suse[localprobe] }}
 {% endfor %}
 {% endif %}
