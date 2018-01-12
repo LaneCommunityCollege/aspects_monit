@@ -48,8 +48,8 @@
 
 - name: restart manual_monit
   shell: /bin/bash restartmonit.sh
-    args:
-      chdir: "/opt/monit/bin/"
+  args:
+    chdir: "/opt/monit/bin/"
   tags:
   - aspects_monit
   - aspects_monit_handlers
