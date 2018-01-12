@@ -1,26 +1,23 @@
-aspects_monit
-========
+# aspects_monit
 
 Install and configure the monit monitoring utility.
 
-Notice
-------
-aspects_monit has undergone a major rewrite as of 2016-Jan-10. It now uses package repositories when possible. Updating to the latest version of monit is done by copying the latest monit excutable over the installed version.
+## Notice
+
+aspects_monit uses package repositories when possible. Updating to the latest version of monit is done by copying the latest monit excutable over the installed version.
 
 This means that if you want to keep using the old way of installing it in /opt/monit, or you use a non-RedHat or non-Debian distro, you will need to set these new variables:
 
 * ```aspects_monit_run_manual_install```
 * ```aspects_monit_use_manual_tasks```
 
-Requirements
-------------
+# Requirements
 
 Set ```hash_behaviour=merge``` in your ansible.cfg file.
 
-Role Variables
---------------
+# Role Variables
 
-See the template file for how these are used. 
+See the template file for how these are used.
 * ```aspects_monit_check_interval```
 * ```aspects_monit_start_delay```
 * ```aspects_monit_logfile```
@@ -41,11 +38,10 @@ Set ```aspects_monit_use_ldap_test: True``` to install it.
 
 Look at the template to see how the variables are used.
 
-Example Playbook
--------------------------
+# Example Playbook
 
-host_vars/vm.redhat.lab
-
+## host_vars/vm.redhat.lab
+```yaml
     ---
     # Configure Monit
     aspects_monit_enabled: True
@@ -80,9 +76,10 @@ host_vars/vm.redhat.lab
           if cpu usage (system) > 30% for 3 times within 5 cycles then alert
           if cpu usage (wait) > 20% for 3 times within 5 cycles then alert
         not every "* 1-2 * * *"
-    
-host_vars/vm.ubuntutrusty.lab
+```
 
+## host_vars/vm.ubuntutrusty.lab
+```yaml
     ---
     # Configure Monit
     aspects_monit_enabled: True
@@ -117,9 +114,10 @@ host_vars/vm.ubuntutrusty.lab
           if cpu usage (system) > 30% for 3 times within 5 cycles then alert
           if cpu usage (wait) > 20% for 3 times within 5 cycles then alert
         not every "* 1-2 * * *"
+```
 
-host_vars/vm.nichedistro.lab
-
+## host_vars/vm.nichedistro.lab
+```yaml
     ---
     # Configure Monit
     aspects_monit_enabled: True
@@ -156,15 +154,17 @@ host_vars/vm.nichedistro.lab
           if cpu usage (system) > 30% for 3 times within 5 cycles then alert
           if cpu usage (wait) > 20% for 3 times within 5 cycles then alert
         not every "* 1-2 * * *"
-
+```
+## Playbook
+```yaml
     - hosts:
       - vm.redhat.lab
       - vm.ubuntutrusty.lab
       - vm.nichedistro.lab
       roles:
       - aspects_monit
+```
 
-License
--------
+# License
 
 MIT
