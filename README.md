@@ -38,6 +38,8 @@ Set ```aspects_monit_use_ldap_test: True``` to install it.
 
 Look at the template to see how the variables are used.
 
+Make sure the ```ldapsearch``` command is available.
+
 # Example Playbook
 
 ## host_vars/vm.redhat.lab
