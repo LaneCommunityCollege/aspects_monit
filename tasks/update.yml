@@ -38,7 +38,7 @@
 
 - name: Copy monit excutable over installed monit
   copy:
-    src: "{{ aspects_monit_update_excutable_relative_path }}"
+    src: "{{ inventory_dir }}/{{ aspects_monit_update_excutable_relative_path }}"
     dest: "{{ aspects_monit_update_excutable_destination }}"
     mode: "755"
     owner: "root"
