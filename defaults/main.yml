@@ -4,11 +4,11 @@ aspects_monit_enabled: False
 aspects_monit_executable_name: monit
 aspects_monit_run_manual_install: False
 aspects_monit_use_manual_tasks: False
-aspects_monit_run_install: False
+aspects_monit_run_install: True
 aspects_monit_use_ldap_test: False
 aspects_monit_ldap_test_config: {}
 aspects_monit_run_update: False
-aspects_monit_update_excutable_relative_path: monit/bin/monit
+aspects_monit_update_excutable_relative_path: files/monit/bin/monit
 aspects_monit_update_excutable_destination: /usr/bin/monit
 #aspects_monit_ldap_test_host: ldaps://ldap.domain.tld
 #aspects_monit_ldap_test_binddn: cn=blah,ou=users,dc=domain,dc=tld
