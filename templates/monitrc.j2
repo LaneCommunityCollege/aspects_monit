@@ -3,7 +3,7 @@
 ## {{ ansible_managed }}
 ###############################################################################
 ## Start Monit in the background (run as a daemon):
-set daemon {{ aspects_monit_check_interval }}
+set daemon {{ aspects_monit_check_interval|default(60) }}
 {% if aspects_monit_start_delay is defined %}
 ## delay start of monit checks.
  with start delay {{ aspects_monit_start_delay }}
