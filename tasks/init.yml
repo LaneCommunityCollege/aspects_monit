@@ -64,6 +64,18 @@
     - aspects_monit
     - aspects_monit_update
 
+- name: CentOS 7 - Add /etc/pam.d/monit file
+  when:
+    - ansible_distribution == "CentOS"
+    - ansible_distribution_major_version == "7"
+  template:
+    src: etc-pam.d-monit.j2
+    dest: /etc/pam.d/monit
+    owner: root
+    group: root
+  tags:
+    - aspects_monit
+
 - include: installLdapTest.yml
   when: aspects_monit_use_ldap_test == true
   tags:
