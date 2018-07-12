@@ -27,3 +27,13 @@
   tags:
   - aspects_monit
   - aspects_monit_run_install
+
+- name: RedHat - Install python-passlib
+  when: aspects_monit_htpasswd_users is defined
+  yum:
+    name: "python-passlib"
+    state: "present"
+    update_cache: "yes"
+  tags:
+  - aspects_monit
+  - aspects_monit_run_install

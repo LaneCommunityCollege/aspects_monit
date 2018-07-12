@@ -14,3 +14,12 @@
   tags:
   - aspects_monit
   - aspects_monit_run_install
+
+- name: Debian - Install python-passlib
+  when: aspects_monit_htpasswd_users is defined
+  apt:
+    pkg: "python-passlib"
+    state: "present"
+  tags:
+  - aspects_monit
+  - aspects_monit_run_install
