@@ -18,3 +18,4 @@ aspects_monit_update_excutable_destination: /usr/bin/monit
 #aspects_monit_ldap_test_filter: (cn=blah)
 #aspects_monit_ldap_test_version: 3
 #aspects_monit_ldap_test_attributes: "cn, sn"
+aspects_monit_htpasswd_path: /etc/monit/htpasswd

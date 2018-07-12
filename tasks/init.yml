@@ -80,3 +80,17 @@
   when: aspects_monit_use_ldap_test == true
   tags:
     - aspects_monit
+
+- name: create htpasswd users
+  when: aspects_monit_htpasswd_users is defined
+  htpasswd:
+    state: "{{ item.value.state }}"
+    create: "yes"
+    path: "{{ aspects_monit_htpasswd_path }}"
+    name: "{{ item.value.username }}"
+    password: "{{ item.value.password }}"
+    crypt_scheme: "{{ item.value.crypt_scheme }}"
+  with_dict: "{{ aspects_monit_htpasswd_users }}"
+  tags:
+    - aspects_monit
+    - aspects_monit_htpasswd

@@ -69,6 +69,33 @@ This is the absolute path on your remote host that is returned by `which monit`.
 Default is `/usr/bin/monit`.
 
 Only change it if `which monit` returns something other than `/usr/bin/monit`.
+## aspects_monit_htpasswd_path
+Path to the htpasswd file you wish to use. 
+
+Default: `/etc/monit/htpasswd`
+
+## aspects_monit_htpasswd_users
+A dictionary/hash of users to place in the htpasswd file.
+
+Default is undefined.
+
+Use this pattern:
+
+```yaml
+aspects_monit_htpasswd_users:
+  <item key>:
+    state: <present or absent>
+    crypt_scheme: <valid scheme from the htpasswd Ansible module>
+    username: <username>
+    password: <password>
+```
+I suggest placing the password in an encrypted file, or a file outside of your version control system.
+
+Read the [Monit documentation](https://mmonit.com/monit/documentation/monit.html#htpasswd-file) about how it works with htpasswd files.
+
+Read the [Ansible documenation](https://docs.ansible.com/ansible/devel/modules/htpasswd_module.html) on the htpasswd module.
+
+> Note: While testing, I had some segfaults using an encrypted password. Plain text worked just fine.
 
 ## LDAP test script
 
