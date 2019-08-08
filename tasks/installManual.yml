@@ -7,7 +7,7 @@
     owner: root
     group: root
     mode: 750
-  with_items:
+  loop:
   - /opt/monit
   - /opt/monit/bin
   - /opt/monit/id

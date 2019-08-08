@@ -1,11 +1,11 @@
 ---
 - name: Include manual install tasks
-  when: 
-    aspects_monit_run_manual_install and 
-    aspects_monit_use_manual_tasks and 
-    aspects_monit_run_update
-  include: installManual.yml
-  tags: 
+  when:
+    - aspects_monit_run_manual_install
+    - aspects_monit_use_manual_tasks
+    - aspects_monit_run_update
+  include_tasks: installManual.yml
+  tags:
     - aspects_monit
     - aspects_monit_install
 
@@ -21,37 +21,37 @@
     - aspects_monit_config
 
 - name: Include Debian Configuration tasks
-  when: 
-    ansible_os_family == "Debian" and 
-    aspects_monit_use_manual_tasks == False 
-  include: configureDebian.yml
-  tags: 
+  when:
+    - ansible_os_family == "Debian"
+    - aspects_monit_use_manual_tasks == False
+  include_tasks: configureDebian.yml
+  tags:
     - aspects_monit
     - aspects_monit_config
 
 - name: Include RedHat Configuration tasks
-  when: 
-    ansible_os_family == "RedHat" and 
-    aspects_monit_use_manual_tasks == False 
-  include: configureRedHat.yml
-  tags: 
+  when:
+    - ansible_os_family == "RedHat"
+    - aspects_monit_use_manual_tasks == False
+  include_tasks: configureRedHat.yml
+  tags:
     - aspects_monit
     - aspects_monit_config
 
 - name: Include manual Configuration tasks
-  when: aspects_monit_use_manual_tasks == True 
-  include: configureManual.yml
-  tags: 
+  when: aspects_monit_use_manual_tasks == True
+  include_tasks: configureManual.yml
+  tags:
     - aspects_monit
     - aspects_monit_config
 
 - name: Include update tasks
-  when: 
-    aspects_monit_run_update and 
-    (ansible_os_family == "Debian" or ansible_os_family == "RedHat") 
-    and aspects_monit_use_manual_tasks == False 
-  include: update.yml
-  tags: 
+  when:
+    - aspects_monit_run_update
+    - (ansible_os_family == "Debian" or ansible_os_family == "RedHat")
+    - aspects_monit_use_manual_tasks == False
+  include_tasks: update.yml
+  tags:
     - aspects_monit
     - aspects_monit_update
 
@@ -86,6 +86,7 @@
 
 - name: create htpasswd users
   when: aspects_monit_htpasswd_users is defined
+  no_log: True
   htpasswd:
     state: "{{ item.value.state }}"
     create: "yes"
@@ -93,7 +94,7 @@
     name: "{{ item.value.username }}"
     password: "{{ item.value.password }}"
     crypt_scheme: "{{ item.value.crypt_scheme }}"
-  with_dict: "{{ aspects_monit_htpasswd_users }}"
+  loop: "{{ aspects_monit_htpasswd_users|dict2items }}"
   tags:
     - aspects_monit
     - aspects_monit_htpasswd

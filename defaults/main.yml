@@ -3,15 +3,14 @@ aspects_packages_packages:
   monit:
     state: "present"
     Ubuntu:
-      1404: "monit"
       1604: "monit"
       1804: "monit"
     Debian:
       9: "monit"
     CentOS:
       7: "monit"
-    OracleLinux:
-      7: "monit"
+#    OracleLinux:
+#      7: "monit"
 
 aspects_monit_enabled: False
 aspects_monit_executable_name: monit
