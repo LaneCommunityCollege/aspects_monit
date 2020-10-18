@@ -12,7 +12,8 @@ This means that if you want to keep using the old way of installing it in /opt/m
 * ```aspects_monit_use_manual_tasks```
 
 ### OracleLinux 7
-OracleLinux has monit in the `ol7_developer_EPEL` repository. You will need to install the `oracle-epel-release-el7` package and then make sure it is configured. 
+OracleLinux has monit in the `ol7_developer_EPEL` repository. This role will install the `oracle-epel-release-el7` package 
+before it tries to install monit.
 
 # Requirements
 
@@ -43,7 +44,7 @@ Default is `False`.
 Set to `True` if you want to use this role.
 
 ## aspects_monit_executable_name
-The name of the monit excutable.
+The name of the monit executable.
 
 Default is `monit`. Only change this if you really need to.
 
@@ -53,7 +54,7 @@ Install using the OS package manager.
 Default is `True`. Set to `False` if you are using a different method of installation, or you do not want to run the package manager tasks every time the role is played.
 
 ## aspects_monit_run_update
-Overwrite the OS excutable with a file copied from your system. Use this to update Monit when the OS repositories are farther behind the current release version than you need.
+Overwrite the OS executable with a file copied from your system. Use this to update Monit when the OS repositories are farther behind the current release version than you need.
 
 Default is `False`.
 
@@ -76,6 +77,10 @@ Only change it if `which monit` returns something other than `/usr/bin/monit`.
 Path to the htpasswd file you wish to use. 
 
 Default: `/etc/monit/htpasswd`
+
+> Note: You need the `python-passlib` or `python3-passlib` packages installed
+> before you can use the httpasswd Ansible module. That is why the packages
+> are added via aspects_packages in [defaults/main.yml](defaults/main.yml).
 
 ## aspects_monit_htpasswd_users
 A dictionary/hash of users to place in the htpasswd file.

@@ -85,8 +85,7 @@
     - aspects_monit
 
 - name: create htpasswd users
-  when: aspects_monit_htpasswd_users is defined
-  no_log: True
+#  no_log: True
   htpasswd:
     state: "{{ item.value.state }}"
     create: "yes"
@@ -94,7 +93,7 @@
     name: "{{ item.value.username }}"
     password: "{{ item.value.password }}"
     crypt_scheme: "{{ item.value.crypt_scheme }}"
-  loop: "{{ aspects_monit_htpasswd_users|dict2items }}"
+  loop: "{{ aspects_monit_htpasswd_users | default({}) | dict2items }}"
   tags:
     - aspects_monit
     - aspects_monit_htpasswd

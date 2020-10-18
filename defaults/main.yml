@@ -1,16 +1,57 @@
 ---
+aspects_packages_prerequisite_packages:
+  epel-release:
+    state: "present"
+    OracleLinux:
+      7: "oracle-epel-release-el7"
 aspects_packages_packages:
   monit:
     state: "present"
     Ubuntu:
       1604: "monit"
       1804: "monit"
+      2004: "monit"
     Debian:
       9: "monit"
+      10: "monit"
     CentOS:
       7: "monit"
-#    OracleLinux:
-#      7: "monit"
+    OracleLinux:
+      7: "monit"
+  # for use with htpasswd module when creating htpasswd users
+  python-passlib:
+    state: "{% if aspects_monit_htpasswd_users is defined %}present{% else %}default{% endif %}"
+    Ubuntu:
+      1604: "python-passlib"
+      1804: "python-passlib"
+      2004: "python-passlib"
+    Debian:
+      9: "python-passlib"
+      10: "python-passlib"
+    CentOS:
+      7: "python-passlib"
+    OracleLinux:
+      7: "python-passlib"
+  python3-passlib:
+    state: "{% if aspects_monit_htpasswd_users is defined %}present{% else %}default{% endif %}"
+    Ubuntu:
+      1604: "python3-passlib"
+      1804: "python3-passlib"
+      2004: "python3-passlib"
+    Debian:
+      9: "python3-passlib"
+      10: "python3-passlib"
+
+
+aspects_packages_add_repo_apt_repos:
+  buster-backports:
+    enabled: True
+    repo:
+      Debian:
+        # Use template to add comment if aspects_monit isn't being used.
+        # Otherwise add repo.
+        10: "{% if aspects_monit_enabled %}deb http://deb.debian.org/debian buster-backports main{% else %}#aspects_monit_enabled not true{% endif %}"
+
 
 aspects_monit_enabled: False
 aspects_monit_executable_name: monit
