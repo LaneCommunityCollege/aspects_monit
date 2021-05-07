@@ -87,13 +87,13 @@
 - name: create htpasswd users
 #  no_log: True
   htpasswd:
-    state: "{{ item.value.state }}"
+    state: "{{ item.1.state }}"
     create: "yes"
     path: "{{ aspects_monit_htpasswd_path }}"
-    name: "{{ item.value.username }}"
-    password: "{{ item.value.password }}"
-    crypt_scheme: "{{ item.value.crypt_scheme }}"
-  loop: "{{ aspects_monit_htpasswd_users | default({}) | dict2items }}"
+    name: "{{ item.1.username }}"
+    password: "{{ item.1.password }}"
+    crypt_scheme: "{{ item.1.crypt_scheme }}"
+  loop: "{{ aspects_monit_htpasswd_users | default({}) | dictsort }}"
   tags:
     - aspects_monit
     - aspects_monit_htpasswd

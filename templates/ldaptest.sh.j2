@@ -1,32 +1,32 @@
 #!/bin/bash
 # This script relies on the existence of ldapsearch
 #{{ ansible_managed }}
-{% if item.value.ldapsearchexe is defined %}
-LDAPSEARCHEXE={{ item.value.ldapsearchexe }}
+{% if item.1.ldapsearchexe is defined %}
+LDAPSEARCHEXE={{ item.1.ldapsearchexe }}
 {% endif %}
-{% if item.value.host is defined %}
-HOST={{ item.value.host }}
+{% if item.1.host is defined %}
+HOST={{ item.1.host }}
 {% endif %}
-{% if item.value.binddn is defined %}
-BINDDN={{ item.value.binddn }}
+{% if item.1.binddn is defined %}
+BINDDN={{ item.1.binddn }}
 {% endif %}
-{% if item.value.password is defined %}
-PASSWORD={{ item.value.password }}
+{% if item.1.password is defined %}
+PASSWORD={{ item.1.password }}
 {% endif %}
-{% if item.value.port is defined %}
-#PORT={{ item.value.port }}
+{% if item.1.port is defined %}
+#PORT={{ item.1.port }}
 {% endif %}
-{% if item.value.base is defined %}
-#BASE={{ item.value.base }}
+{% if item.1.base is defined %}
+#BASE={{ item.1.base }}
 {% endif %}
-{% if item.value.filter is defined %}
-FILTER={{ item.value.filter }}
+{% if item.1.filter is defined %}
+FILTER={{ item.1.filter }}
 {% endif %}
-{% if item.value.version is defined %}
-VERSION={{ item.value.version }}
+{% if item.1.version is defined %}
+VERSION={{ item.1.version }}
 {% endif %}
-{% if item.value.attributes is defined %}
-ATTRIBUTES={{ item.value.attributes }}
+{% if item.1.attributes is defined %}
+ATTRIBUTES={{ item.1.attributes }}
 {% endif %}
 
 ldapsearch -x -D $BINDDN -w $PASSWORD -H $HOST -P $VERSION "$FILTER" $ATTRIBUTES

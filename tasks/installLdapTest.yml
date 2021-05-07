@@ -3,10 +3,10 @@
 - name: Set ldap server authentication test script templates.
   template:
     src: "ldaptest.sh.j2"
-    dest: "/root/scripts/{{ item.value.name }}.ldaptest.sh"
+    dest: "/root/scripts/{{ item.1.name }}.ldaptest.sh"
     mode: 700
     owner: root
     group: root
-  loop: "{{ aspects_monit_ldap_test_config|dict2items }}"
+  loop: "{{ aspects_monit_ldap_test_config | default({}) | dictsort }}"
   tags:
     - aspects_monit
