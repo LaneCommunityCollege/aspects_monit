@@ -8,11 +8,9 @@ aspects_packages_packages:
   monit:
     state: "present"
     Ubuntu:
-      1604: "monit"
       1804: "monit"
       2004: "monit"
     Debian:
-      9: "monit"
       10: "monit"
     CentOS:
       7: "monit"
@@ -22,11 +20,9 @@ aspects_packages_packages:
   python-passlib:
     state: "{% if aspects_monit_htpasswd_users is defined %}present{% else %}default{% endif %}"
     Ubuntu:
-      1604: "python-passlib"
       1804: "python-passlib"
       2004: "python-passlib"
     Debian:
-      9: "python-passlib"
       10: "python-passlib"
     CentOS:
       7: "python-passlib"
@@ -35,11 +31,9 @@ aspects_packages_packages:
   python3-passlib:
     state: "{% if aspects_monit_htpasswd_users is defined %}present{% else %}default{% endif %}"
     Ubuntu:
-      1604: "python3-passlib"
       1804: "python3-passlib"
       2004: "python3-passlib"
     Debian:
-      9: "python3-passlib"
       10: "python3-passlib"
 
 
