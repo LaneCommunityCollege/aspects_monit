@@ -23,7 +23,7 @@ aspects_packages_packages:
     Ubuntu:
       1804: "python-passlib"
       2004: "python-passlib"
-      2204: "python-passlib"
+      2204: "python3-passlib"
     Debian:
       10: "python-passlib"
     CentOS:
