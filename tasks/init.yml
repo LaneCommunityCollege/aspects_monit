@@ -20,6 +20,17 @@
     - aspects_monit
     - aspects_monit_config
 
+- name: Make sure /var/monit exists
+  file:
+    state: directory
+    path: /var/monit
+    owner: root
+    group: root
+    mode: "0755"
+  tags:
+    - aspects_monit
+    - aspects_monit_config
+
 - name: Include Debian Configuration tasks
   when:
     - ansible_os_family == "Debian"
@@ -79,13 +90,38 @@
   tags:
   - aspects_monit
 
+- name: OracleLinux 8 - Add /etc/pam.d/monit file
+  when:
+  - ansible_distribution == "OracleLinux"
+  - ansible_distribution_major_version == "8"
+  template:
+    src: etc-pam.d-monit.j2
+    dest: /etc/pam.d/monit
+    owner: root
+    group: root
+  tags:
+  - aspects_monit
+
+- name: OracleLinux 9 - Add /etc/pam.d/monit file
+  when:
+  - ansible_distribution == "OracleLinux"
+  - ansible_distribution_major_version == "9"
+  template:
+    src: etc-pam.d-monit.j2
+    dest: /etc/pam.d/monit
+    owner: root
+    group: root
+  tags:
+  - aspects_monit
+
 - include: installLdapTest.yml
   when: aspects_monit_use_ldap_test == true
   tags:
     - aspects_monit
 
 - name: create htpasswd users
-#  no_log: True
+  when: aspects_monit_htpasswd_enabled
+  no_log: True
   htpasswd:
     state: "{{ item.1.state }}"
     create: "yes"

@@ -1,9 +1,12 @@
 ---
+aspects_monit_htpasswd_enabled: False
 aspects_packages_prerequisite_packages:
   epel-release:
     state: "present"
     OracleLinux:
       7: "oracle-epel-release-el7"
+      8: "oracle-epel-release-el8"
+      9: "oracle-epel-release-el9"
 aspects_packages_packages:
   monit:
     state: "present"
@@ -17,20 +20,10 @@ aspects_packages_packages:
       7: "monit"
     OracleLinux:
       7: "monit"
+      8: "monit"
+      9: "monit"
   # for use with htpasswd module when creating htpasswd users
   python-passlib:
-    state: "{% if aspects_monit_htpasswd_users is defined %}present{% else %}default{% endif %}"
-    Ubuntu:
-      1804: "python-passlib"
-      2004: "python-passlib"
-      2204: "python3-passlib"
-    Debian:
-      10: "python-passlib"
-    CentOS:
-      7: "python-passlib"
-    OracleLinux:
-      7: "python-passlib"
-  python3-passlib:
     state: "{% if aspects_monit_htpasswd_users is defined %}present{% else %}default{% endif %}"
     Ubuntu:
       1804: "python3-passlib"
@@ -38,7 +31,12 @@ aspects_packages_packages:
       2204: "python3-passlib"
     Debian:
       10: "python3-passlib"
-
+    CentOS:
+      7: "python-passlib"
+    OracleLinux:
+      7: "python3-passlib"
+      8: "python3-passlib"
+      9: "python3-passlib"
 
 aspects_packages_add_repo_apt_repos:
   buster-backports:
