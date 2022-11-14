@@ -20,10 +20,10 @@
     - aspects_monit
     - aspects_monit_config
 
-- name: Make sure /var/monit exists
+- name: Make sure /var/lib/monit exists
   file:
     state: directory
-    path: /var/monit
+    path: /var/lib/monit
     owner: root
     group: root
     mode: "0755"
