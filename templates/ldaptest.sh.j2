@@ -8,16 +8,16 @@ LDAPSEARCHEXE={{ item.1.ldapsearchexe }}
 HOST={{ item.1.host }}
 {% endif %}
 {% if item.1.binddn is defined %}
-BINDDN={{ item.1.binddn }}
+BINDDN="{{ item.1.binddn }}"
 {% endif %}
 {% if item.1.password is defined %}
-PASSWORD={{ item.1.password }}
+PASSWORD="{{ item.1.password }}"
 {% endif %}
 {% if item.1.port is defined %}
 #PORT={{ item.1.port }}
 {% endif %}
 {% if item.1.base is defined %}
-#BASE={{ item.1.base }}
+BASE={{ item.1.base }}
 {% endif %}
 {% if item.1.filter is defined %}
 FILTER={{ item.1.filter }}
@@ -28,5 +28,8 @@ VERSION={{ item.1.version }}
 {% if item.1.attributes is defined %}
 ATTRIBUTES={{ item.1.attributes }}
 {% endif %}
-
-ldapsearch -x -D $BINDDN -w $PASSWORD -H $HOST -P $VERSION "$FILTER" $ATTRIBUTES
+{% if item.1.base is defined %}
+ldapsearch -x -D "$BINDDN" -w "$PASSWORD" -H "$HOST" -P "$VERSION" -b "$BASE" "$FILTER" "$ATTRIBUTES"
+{% else %}
+ldapsearch -x -D "$BINDDN" -w "$PASSWORD" -H "$HOST" -P "$VERSION" "$FILTER" "$ATTRIBUTES"
+{% endif %}
