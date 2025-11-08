@@ -80,41 +80,41 @@
 
 - name: OracleLinux 7 - Add /etc/pam.d/monit file
   when:
-  - ansible_distribution == "OracleLinux"
-  - ansible_distribution_major_version == "7"
+    - ansible_distribution == "OracleLinux"
+    - ansible_distribution_major_version == "7"
   template:
     src: etc-pam.d-monit.j2
     dest: /etc/pam.d/monit
     owner: root
     group: root
   tags:
-  - aspects_monit
+    - aspects_monit
 
 - name: OracleLinux 8 - Add /etc/pam.d/monit file
   when:
-  - ansible_distribution == "OracleLinux"
-  - ansible_distribution_major_version == "8"
+    - ansible_distribution == "OracleLinux"
+    - ansible_distribution_major_version == "8"
   template:
     src: etc-pam.d-monit.j2
     dest: /etc/pam.d/monit
     owner: root
     group: root
   tags:
-  - aspects_monit
+    - aspects_monit
 
 - name: OracleLinux 9 - Add /etc/pam.d/monit file
   when:
-  - ansible_distribution == "OracleLinux"
-  - ansible_distribution_major_version == "9"
+    - ansible_distribution == "OracleLinux"
+    - ansible_distribution_major_version == "9"
   template:
     src: etc-pam.d-monit.j2
     dest: /etc/pam.d/monit
     owner: root
     group: root
   tags:
-  - aspects_monit
+    - aspects_monit
 
-- include: installLdapTest.yml
+- include_tasks: installLdapTest.yml
   when: aspects_monit_use_ldap_test == true
   tags:
     - aspects_monit

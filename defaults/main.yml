@@ -14,6 +14,7 @@ aspects_packages_packages:
       1804: "monit"
       2004: "monit"
       2204: "monit"
+      2404: "monit"
     Debian:
       10: "monit"
     CentOS:

@@ -1,6 +1,6 @@
 ---
 - name: Run aspects_monit if enabled
   when: aspects_monit_enabled
-  include: init.yml
+  include_tasks: init.yml
   tags:
     - aspects_monit
